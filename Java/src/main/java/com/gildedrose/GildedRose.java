@@ -18,38 +18,17 @@ class GildedRose {
             }
             switch (item.name) {
                 case AgedBrie -> updateAgedBrie(item);
+                case backStagePass -> updateBackStagePass(item);
                 default -> {
-                    if (!item.name.equals(backStagePass)) {
-                        if (item.quality > 0) {
-                            item.quality = item.quality - 1;
-                        }
-                    } else {
-                        if (item.quality < 50) {
-                            item.quality = item.quality + 1;
-
-                            if (item.sellIn < 11) {
-                                if (item.quality < 50) {
-                                    item.quality = item.quality + 1;
-                                }
-                            }
-
-                            if (item.sellIn < 6) {
-                                if (item.quality < 50) {
-                                    item.quality = item.quality + 1;
-                                }
-                            }
-                        }
+                    if (item.quality > 0) {
+                        item.quality = item.quality - 1;
                     }
 
                     item.sellIn = item.sellIn - 1;
 
                     if (item.sellIn < 0) {
-                        if (!item.name.equals(backStagePass)) {
-                            if (item.quality > 0) {
-                                item.quality = item.quality - 1;
-                            }
-                        } else {
-                            item.quality = 0;
+                        if (item.quality > 0) {
+                            item.quality = item.quality - 1;
                         }
                     }
                 }
@@ -62,5 +41,18 @@ class GildedRose {
             agedBrie.quality++;
         }
         agedBrie.sellIn = agedBrie.sellIn - 1;
+    }
+
+    private void updateBackStagePass(final Item backStagePass) {
+        if (backStagePass.sellIn > 10) {
+            backStagePass.quality++;
+        } else if (backStagePass.sellIn > 5) {
+            backStagePass.quality += 2;
+        } else if (backStagePass.sellIn > 0) {
+            backStagePass.quality += 3;
+        } else {
+            backStagePass.quality = 0;
+        }
+        backStagePass.sellIn--;
     }
 }
