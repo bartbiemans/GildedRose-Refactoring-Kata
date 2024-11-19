@@ -19,19 +19,23 @@ class GildedRose {
             switch (item.name) {
                 case AgedBrie -> updateAgedBrie(item);
                 case backStagePass -> updateBackStagePass(item);
-                default -> {
-                    if (item.quality > 0) {
-                        item.quality = item.quality - 1;
-                    }
+                default -> updateDefaultItem(item);
+            }
+        }
+    }
 
-                    item.sellIn = item.sellIn - 1;
+    private void updateDefaultItem(final Item item) {
+        if(item.quality <= 0 ) {
+            item.sellIn = item.sellIn - 1;
+            return;
+        }
 
-                    if (item.sellIn < 0) {
-                        if (item.quality > 0) {
-                            item.quality = item.quality - 1;
-                        }
-                    }
-                }
+        item.quality = item.quality - 1;
+        item.sellIn = item.sellIn - 1;
+
+        if (item.sellIn < 0) {
+            if (item.quality > 0) {
+                item.quality = item.quality - 1;
             }
         }
     }
