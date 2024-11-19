@@ -118,4 +118,17 @@ class GildedRoseTest {
         assertEquals(13, app.items[0].quality);
 
     }
+
+    @Test
+    void givenItemWithNameBackStagePassAndSellIn0_WhenDayHasPassed_ThenQualityIs0() {
+        final int initialSellIn = 0;
+        final int initialQuality = 10;
+        final Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", initialSellIn, initialQuality)};
+        final GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(0, app.items[0].quality);
+
+    }
 }
