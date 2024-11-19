@@ -13,51 +13,54 @@ class GildedRose {
         final String sulfuras = "Sulfuras, Hand of Ragnaros";
 
         for (Item item : items) {
-            if(item.name.equals(sulfuras)){
+            if (item.name.equals(sulfuras)) {
                 continue;
             }
-            if (!item.name.equals(AgedBrie)
-                && !item.name.equals(backStagePass)) {
-                if (item.quality > 0) {
-                    item.quality = item.quality - 1;
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-
-                    if (item.name.equals(backStagePass)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            item.sellIn = item.sellIn - 1;
-
-            if (item.sellIn < 0) {
-                if (!item.name.equals(AgedBrie)) {
+            switch (item.name) {
+                case AgedBrie -> updateAgedBrie(item);
+                default -> {
                     if (!item.name.equals(backStagePass)) {
                         if (item.quality > 0) {
                             item.quality = item.quality - 1;
                         }
                     } else {
-                        item.quality = 0;
+                        if (item.quality < 50) {
+                            item.quality = item.quality + 1;
+
+                            if (item.sellIn < 11) {
+                                if (item.quality < 50) {
+                                    item.quality = item.quality + 1;
+                                }
+                            }
+
+                            if (item.sellIn < 6) {
+                                if (item.quality < 50) {
+                                    item.quality = item.quality + 1;
+                                }
+                            }
+                        }
                     }
-                } else {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
+
+                    item.sellIn = item.sellIn - 1;
+
+                    if (item.sellIn < 0) {
+                        if (!item.name.equals(backStagePass)) {
+                            if (item.quality > 0) {
+                                item.quality = item.quality - 1;
+                            }
+                        } else {
+                            item.quality = 0;
+                        }
                     }
                 }
             }
         }
+    }
+
+    private void updateAgedBrie(final Item agedBrie) {
+        if (agedBrie.quality < 50) {
+            agedBrie.quality++;
+        }
+        agedBrie.sellIn = agedBrie.sellIn - 1;
     }
 }
