@@ -81,15 +81,15 @@ class GildedRoseTest {
     }
 
     @Test
-    void givenItemWithNameBackStagePass_WhenDayHasPassedAndSellInIsHigherThan10_ThenQualityDecreases() {
-        final int initialSellIn = 10;
+    void givenItemWithNameBackStagePass_WhenDayHasPassedAndSellInIsHigherThan10_ThenQualityIncreases() {
+        final int initialSellIn = 20;
         final int initialQuality = 10;
         final Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", initialSellIn, initialQuality)};
         final GildedRose app = new GildedRose(items);
 
         app.updateQuality();
 
-        assertEquals(12, app.items[0].quality);
+        assertEquals(11, app.items[0].quality);
 
     }
 
