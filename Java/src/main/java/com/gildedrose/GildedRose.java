@@ -44,7 +44,13 @@ class GildedRose {
     }
 
     private int calculateQualityForAgedBrie(final Item agedBrie) {
-        return agedBrie.quality < 50 ? agedBrie.quality + 1 : agedBrie.quality;
+        if (agedBrie.quality == 50) {
+            return 50;
+        }
+        if (agedBrie.sellIn < 0) {
+            return agedBrie.quality <= 48 ? agedBrie.quality + 2 : 50;
+        }
+        return agedBrie.quality + 1;
     }
 
     private int calculateQualityForBackStagePass(final Item backStagePass) {

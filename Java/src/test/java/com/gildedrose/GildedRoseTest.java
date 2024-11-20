@@ -69,6 +69,30 @@ class GildedRoseTest {
     }
 
     @Test
+    void givenItemWithNameAgedBrieAndSellInIsNegative_WhenDayHasPassed_ThenQualityGoesUpBy2() {
+        final int initialQuality = 10;
+        final int initialSellIn = -5;
+        final Item[] items = new Item[]{new Item("Aged Brie", initialSellIn, initialQuality)};
+        final GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(12,app.items[0].quality);
+    }
+
+    @Test
+    void givenItemWithNameAgedBrieAndQualityIs50_WhenDayHasPassed_ThenQualityDoesNotIncrease() {
+        final int initialQuality = 50;
+        final int initialSellIn = -5;
+        final Item[] items = new Item[]{new Item("Aged Brie", initialSellIn, initialQuality)};
+        final GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(50,app.items[0].quality);
+    }
+
+    @Test
     void givenItemWithNameSulfurasHandOfRagnaros_WhenDayHasPassed_ThenQualityDoesNotDegrade() {
         final int initialQuality = 10;
         final Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 10, initialQuality)};
