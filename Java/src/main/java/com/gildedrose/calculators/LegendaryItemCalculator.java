@@ -17,7 +17,7 @@ public class LegendaryItemCalculator implements ItemCalculator {
     }
 
     @Override
-    public ItemCalculator instantiate(Item item) {
+    public ItemCalculator instantiate(final Item item) {
         this.item = item;
         return this;
     }
