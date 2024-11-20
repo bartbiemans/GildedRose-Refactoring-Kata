@@ -11,8 +11,8 @@ public class AgedBrieCalculator implements ItemCalculator {
     private Item item;
 
     @Override
-    public boolean applicableFor(final String name) {
-        return QUALIFIED_ITEMS.contains(name);
+    public boolean applicableFor(final Item item) {
+        return QUALIFIED_ITEMS.contains(item.name);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.gildedrose;
 
 public interface ItemCalculator {
 
-    boolean applicableFor(String name);
+    boolean applicableFor(Item item);
 
     ItemCalculator instantiate(Item item);
 

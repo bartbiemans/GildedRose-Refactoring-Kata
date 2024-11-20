@@ -18,7 +18,7 @@ public final class ItemProcessorFactory {
 
     public static ItemCalculator getQualityCalculatorForItem(final Item item) {
         return CALCULATORS.stream()
-            .filter(calculator -> calculator.applicableFor(item.name))
+            .filter(calculator -> calculator.applicableFor(item))
             .findFirst()
             .orElse(DEFAULT_QUALITY_CALCULATOR)
             .instantiate(item);
