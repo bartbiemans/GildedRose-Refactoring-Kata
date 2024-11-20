@@ -19,7 +19,7 @@ class GildedRose {
                     case "Conjured Mana Cake" -> calculateQualityForConjuredItem(item);
                     default -> calculateQualityForDefaultItem(item);
                 };
-                item.sellIn = item.sellIn - 1;
+                item.sellIn--;
             });
     }
 
