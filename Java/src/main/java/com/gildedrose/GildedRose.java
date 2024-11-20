@@ -13,6 +13,7 @@ class GildedRose {
         final String AgedBrie = "Aged Brie";
         final String backStagePass = "Backstage passes to a TAFKAL80ETC concert";
         final String sulfuras = "Sulfuras, Hand of Ragnaros";
+        final String conjured = "Conjured Mana Cake";
 
         Arrays.stream(items)
             .filter(item -> !item.name.equals(sulfuras))
@@ -20,10 +21,18 @@ class GildedRose {
                 item.quality = switch (item.name) {
                     case AgedBrie -> calculateQualityForAgedBrie(item);
                     case backStagePass -> calculateQualityForBackStagePass(item);
+                    case conjured -> calculateQualityForConjuredItem(item);
                     default -> calculateQualityForDefaultItem(item);
                 };
                 item.sellIn = item.sellIn - 1;
             });
+    }
+
+    private int calculateQualityForConjuredItem(final Item item) {
+        if (item.quality == 0) {
+            return 0;
+        }
+        return item.quality >= 2 ? item.quality - 2 : item.quality - 1;
     }
 
     private int calculateQualityForDefaultItem(final Item item) {

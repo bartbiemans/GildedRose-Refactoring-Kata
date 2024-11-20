@@ -131,4 +131,30 @@ class GildedRoseTest {
         assertEquals(0, app.items[0].quality);
 
     }
+
+    @Test
+    void givenItemWithNameConjured_WhenDayHasPassed_ThenQualityIsDecreasedBy2() {
+        final int initialSellIn = 10;
+        final int initialQuality = 10;
+        final Item[] items = new Item[]{new Item("Conjured Mana Cake", initialSellIn, initialQuality)};
+        final GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(8, app.items[0].quality);
+
+    }
+
+    @Test
+    void givenItemWithNameConjuredAndQuality0_WhenDayHasPassed_ThenQualityIsNotDecreased() {
+        final int initialSellIn = 10;
+        final int initialQuality = 0;
+        final Item[] items = new Item[]{new Item("Conjured Mana Cake", initialSellIn, initialQuality)};
+        final GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(0, app.items[0].quality);
+
+    }
 }
