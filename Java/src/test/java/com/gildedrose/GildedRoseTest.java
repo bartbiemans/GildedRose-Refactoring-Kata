@@ -133,6 +133,19 @@ class GildedRoseTest {
     }
 
     @Test
+    void givenItemWithNameBackStagePassAndSellIn1AndQuality50_WhenDayHasPassed_ThenQualityIsNotIncreased() {
+        final int initialSellIn = 1;
+        final int initialQuality = 50;
+        final Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", initialSellIn, initialQuality)};
+        final GildedRose app = new GildedRose(items);
+
+        app.updateQuality();
+
+        assertEquals(50, app.items[0].quality);
+
+    }
+
+    @Test
     void givenItemWithNameConjured_WhenDayHasPassed_ThenQualityIsDecreasedBy2() {
         final int initialSellIn = 10;
         final int initialQuality = 10;

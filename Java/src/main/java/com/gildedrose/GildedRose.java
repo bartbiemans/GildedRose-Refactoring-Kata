@@ -48,16 +48,19 @@ class GildedRose {
     }
 
     private int calculateQualityForBackStagePass(final Item backStagePass) {
+        if (backStagePass.quality == 50) {
+            return backStagePass.quality;
+        }
         if (backStagePass.sellIn > 10) {
             return backStagePass.quality + 1;
         }
         if (backStagePass.sellIn > 5) {
-            return backStagePass.quality + 2;
+            return backStagePass.quality <= 48 ? backStagePass.quality + 2 : 50;
         }
         if (backStagePass.sellIn > 0) {
-            return backStagePass.quality + 3;
-        } else {
-            return backStagePass.quality = 0;
+            return backStagePass.quality <= 47 ? backStagePass.quality + 3 : 50;
+
         }
+        return backStagePass.quality = 0;
     }
 }
