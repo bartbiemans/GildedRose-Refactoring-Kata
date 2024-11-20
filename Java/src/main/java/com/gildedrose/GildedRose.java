@@ -10,18 +10,13 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        final String AgedBrie = "Aged Brie";
-        final String backStagePass = "Backstage passes to a TAFKAL80ETC concert";
-        final String sulfuras = "Sulfuras, Hand of Ragnaros";
-        final String conjured = "Conjured Mana Cake";
-
         Arrays.stream(items)
-            .filter(item -> !item.name.equals(sulfuras))
+            .filter(item -> !item.name.equals("Sulfuras, Hand of Ragnaros"))
             .forEach(item -> {
                 item.quality = switch (item.name) {
-                    case AgedBrie -> calculateQualityForAgedBrie(item);
-                    case backStagePass -> calculateQualityForBackStagePass(item);
-                    case conjured -> calculateQualityForConjuredItem(item);
+                    case "Aged Brie" -> calculateQualityForAgedBrie(item);
+                    case "Backstage passes to a TAFKAL80ETC concert" -> calculateQualityForBackStagePass(item);
+                    case "Conjured Mana Cake" -> calculateQualityForConjuredItem(item);
                     default -> calculateQualityForDefaultItem(item);
                 };
                 item.sellIn = item.sellIn - 1;
