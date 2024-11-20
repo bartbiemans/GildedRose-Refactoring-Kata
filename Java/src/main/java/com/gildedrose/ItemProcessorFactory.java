@@ -10,7 +10,6 @@ import java.util.List;
 
 public final class ItemProcessorFactory {
 
-    private static final ItemCalculator DEFAULT_QUALITY_CALCULATOR = new DefaultItemCalculator();
     private static final List<ItemCalculator> CALCULATORS = List.of(new AgedBrieCalculator(), new BackStagePassCalculator(), new ConjuredItemCalculator(), new LegendaryItemCalculator());
 
     private ItemProcessorFactory() {
@@ -20,7 +19,7 @@ public final class ItemProcessorFactory {
         return CALCULATORS.stream()
             .filter(calculator -> calculator.applicableFor(item))
             .findFirst()
-            .orElse(DEFAULT_QUALITY_CALCULATOR)
+            .orElseGet(DefaultItemCalculator::new)
             .instantiate(item);
     }
 
