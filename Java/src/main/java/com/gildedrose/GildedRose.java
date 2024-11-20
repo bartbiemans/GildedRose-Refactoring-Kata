@@ -40,10 +40,7 @@ class GildedRose {
             return 0;
         }
 
-        if (item.sellIn <= 0 && item.quality > 0) {
-            return item.quality - 2;
-        }
-        return item.quality - 1;
+        return item.sellIn <= 0 ? item.quality - 2 : item.quality - 1;
     }
 
     private int calculateQualityForAgedBrie(final Item agedBrie) {
