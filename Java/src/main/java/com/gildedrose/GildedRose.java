@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import java.util.Arrays;
+
 class GildedRose {
     Item[] items;
 
@@ -12,18 +14,16 @@ class GildedRose {
         final String backStagePass = "Backstage passes to a TAFKAL80ETC concert";
         final String sulfuras = "Sulfuras, Hand of Ragnaros";
 
-        for (final Item item : items) {
-            if (item.name.equals(sulfuras)) {
-                continue;
-            }
-
-            item.quality = switch (item.name) {
-                case AgedBrie -> calculateQualityForAgedBrie(item);
-                case backStagePass -> calculateQualityForBackStagePass(item);
-                default -> calculateQualityForDefaultItem(item);
-            };
-            item.sellIn = item.sellIn - 1;
-        }
+        Arrays.stream(items)
+            .filter(item -> !item.name.equals(sulfuras))
+            .forEach(item -> {
+                item.quality = switch (item.name) {
+                    case AgedBrie -> calculateQualityForAgedBrie(item);
+                    case backStagePass -> calculateQualityForBackStagePass(item);
+                    default -> calculateQualityForDefaultItem(item);
+                };
+                item.sellIn = item.sellIn - 1;
+            });
     }
 
     private int calculateQualityForDefaultItem(final Item item) {
