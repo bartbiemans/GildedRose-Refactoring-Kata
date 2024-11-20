@@ -47,7 +47,7 @@ class GildedRose {
         if (agedBrie.quality == 50) {
             return 50;
         }
-        if (agedBrie.sellIn < 0) {
+        if (agedBrie.sellIn <= 0) {
             return agedBrie.quality <= 48 ? agedBrie.quality + 2 : 50;
         }
         return agedBrie.quality + 1;
